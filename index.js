@@ -28,7 +28,7 @@ client.on('ready', () => {
 client.on('messageCreate', async (message) => {
   if (message.author.bot) return;
 
-  if (message.content.startsWith('!spam')) {
+  if (message.content.toLowerCase().startsWith('!spam')) {
     const query = message.content.slice(5).trim();
     await connectToMindsDBCloud();
 
@@ -36,7 +36,8 @@ client.on('messageCreate', async (message) => {
 
     console.log("result----->",response);
  
-    message.reply(JSON.stringify(response.rows[0]));
+    message.reply(JSON.stringify(response.rows[0].pred));
+    message.reply(JSON.stringify(response.rows[0].pred_explain));
   }
 });
 
